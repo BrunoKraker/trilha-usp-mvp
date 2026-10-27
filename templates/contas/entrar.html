@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Entrar — Trilha USP{% endblock %}
+{% block content %}
+<main>
+  <div class="auth-box">
+    <h1>Entrar</h1>
+    <p>Informe seu e-mail institucional. Enviaremos um link de acesso — sem senha.</p>
+    <form class="form" method="post" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div class="field">
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}{{ form.email.errors }}
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">Enviar link de acesso</button>
+    </form>
+    <p class="muted" style="margin-top:16px">Só guardamos seu e-mail, o nome de exibição e o semestre de ingresso (LGPD).</p>
+  </div>
+</main>
+{% endblock %}

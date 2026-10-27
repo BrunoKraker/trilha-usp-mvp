@@ -1,0 +1,35 @@
+/* Estilos exclusivos da documentação: sem modificar a identidade compartilhada. */
+.doc-foot:has(.pdf-card-actions){flex-wrap:wrap;}
+.pdf-card-actions{display:flex;flex-wrap:wrap;gap:8px;}
+.pdf-card-actions [hidden]{display:none;}
+.pdf-modal{border:1px solid var(--line);border-radius:var(--radius-lg);padding:0;margin:auto;width:min(1100px,calc(100vw - 32px));max-width:none;height:min(900px,calc(100dvh - 32px));max-height:calc(100dvh - 32px);background:var(--paper);color:var(--ink);font-family:var(--font-sans);overflow:hidden;box-shadow:var(--shadow-lg);}
+.pdf-modal[open]{display:flex;flex-direction:column;}
+/* Entrada e saída: fade + escala curta, sem animar o conteúdo do canvas. */
+.pdf-modal{opacity:0;transform:scale(.98);transition:opacity .3s ease-out,transform .3s ease-out;}
+.pdf-modal.is-visible{opacity:1;transform:scale(1);}
+.pdf-modal::backdrop{background:rgba(0,35,74,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s ease-out;}
+.pdf-modal.is-visible::backdrop{opacity:1;}
+.pdf-modal-header{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--surface);border-bottom:1px solid var(--line);flex-shrink:0;}
+.pdf-modal-header h2{font-family:var(--font-sans);font-size:18px;line-height:1.4;flex:1;min-width:0;overflow-wrap:anywhere;}
+.pdf-close{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--usp-blue-900);font-size:28px;line-height:1;transition:background-color .3s ease-out,border-color .3s ease-out;}
+.pdf-close:hover{background:var(--paper);border-color:var(--usp-gold);}
+.pdf-toolbar{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--surface);flex-shrink:0;}
+.pdf-toolbar label,.pdf-page-label,.pdf-status{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);}
+.pdf-toolbar select{font-family:var(--font-sans);font-size:13px;min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);padding:6px;max-width:145px;}
+.pdf-modal button:disabled,.pdf-modal select:disabled{opacity:.5;cursor:default;transform:none;}
+.pdf-modal .btn{transition:background-color .3s ease-out,border-color .3s ease-out,color .3s ease-out;transform:none;}
+.pdf-stage{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scroll-behavior:smooth;padding:16px;}
+.pdf-stage canvas{display:block;margin:0 auto;background:var(--surface);box-shadow:var(--shadow-sm);}
+.pdf-stage [hidden]{display:none;}
+.pdf-status{padding:8px 16px;margin:0;border-top:1px solid var(--line);background:var(--surface);flex-shrink:0;}
+.pdf-error{max-width:52ch;margin:40px auto;line-height:1.7;text-align:center;}
+.pdf-error p{margin-bottom:20px;}
+.pdf-modal :focus-visible{outline:3px solid var(--usp-blue-700);outline-offset:3px;}
+@media(max-width:600px){
+ .pdf-modal{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);border-radius:12px;}
+ .pdf-modal-header{padding:12px;gap:8px;flex-wrap:wrap;}.pdf-modal-header h2{font-size:15px;flex-basis:calc(100% - 60px);order:0;}.pdf-close{order:1;}.pdf-header-download{order:2;}.pdf-toolbar{gap:8px;padding:8px;}.pdf-toolbar .btn{padding:8px 10px;}.pdf-stage{padding:16px;}
+}
+@media(prefers-reduced-motion:reduce){
+ .pdf-modal,.pdf-modal::backdrop,.pdf-modal *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
+ .pdf-modal{transform:none;}
+}

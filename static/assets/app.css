@@ -1,0 +1,29 @@
+/* Complementos do MVP (formulários, avisos, avaliação). Usa os tokens de styles.css. */
+.inline-form{display:inline;margin:0}
+.flash-wrap{padding-top:16px}
+.flash{padding:12px 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);margin-bottom:8px;font-size:14px}
+.flash-success{border-color:#2e8b57;background:#eef8f2}
+.flash-error{border-color:#c0392b;background:#fdf0ee}
+.flash-info{border-color:var(--usp-blue-700)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.auth-box{max-width:460px;margin:56px auto;padding:0 20px}
+.auth-box .form{margin-top:18px}
+.auth-box input,.auth-box select,.form input,.form select,.form textarea{width:100%;font:inherit}
+.errorlist{list-style:none;margin:4px 0 0;padding:0;color:#b03a2e;font-size:13px}
+a.disc-item{text-decoration:none;color:inherit;display:flex}
+.list-pane form{margin:0}
+.rate-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.rate-row label{border:1px solid var(--line-strong);border-radius:8px;padding:6px 12px;cursor:pointer;font-weight:600}
+.rate-row input{position:absolute;opacity:0}
+.rate-row input:checked+span{color:var(--usp-blue-900)}
+.rate-row label:has(input:checked){background:var(--usp-blue-700);color:#fff;border-color:var(--usp-blue-700)}
+.rate-row label:has(input:focus-visible){outline:2px solid var(--usp-blue-700);outline-offset:2px}
+.contribute{margin-top:28px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.contribute h5{margin-top:0}
+.contribute .field{margin-bottom:12px}
+.resumo-body{white-space:normal;margin:8px 0 0;font-size:14px}
+.material-card .by-row{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.btn-link{background:none;border:0;padding:0;color:var(--usp-blue-700);font-weight:600;cursor:pointer;font:inherit}
+.muted{color:var(--ink-mute);font-size:13px}
+.empty{padding:28px;border:1px dashed var(--line-strong);border-radius:12px;text-align:center}
+.disc-item .diff-dot.sem{background:var(--line-strong)}

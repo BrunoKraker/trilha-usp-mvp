@@ -1,0 +1,21 @@
+# Backup semanal do banco como artefato do GitHub (guardado por 30 dias).
+# Requer o segredo DATABASE_URL no repositório (Settings > Secrets). NÃO TESTADO ainda.
+name: backup-semanal
+on:
+  schedule: [{cron: "0 6 * * 0"}]
+  workflow_dispatch:
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar cliente PostgreSQL 16
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client-16
+      - name: Dump
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pg_dump --no-owner --format=custom "$DATABASE_URL" -f backup.dump
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backup-trilha-usp
+          path: backup.dump
+          retention-days: 30

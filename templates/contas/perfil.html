@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Meu perfil — Trilha USP{% endblock %}
+{% block content %}
+<main>
+  <div class="auth-box">
+    <h1>Meu perfil</h1>
+    <p>Usamos o semestre de ingresso para liberar a contribuição apenas em disciplinas que você já cursou. Seu e-mail não aparece para outros alunos.</p>
+    <form class="form" method="post" novalidate>{% csrf_token %}
+      <div class="field"><label for="{{ form.nome_exibicao.id_for_label }}">Nome de exibição</label>{{ form.nome_exibicao }}<span class="muted">Ex.: Ana T.</span>{{ form.nome_exibicao.errors }}</div>
+      <div class="field"><label for="{{ form.ingresso_ano.id_for_label }}">Ano de ingresso</label>{{ form.ingresso_ano }}{{ form.ingresso_ano.errors }}</div>
+      <div class="field"><label for="{{ form.ingresso_semestre.id_for_label }}">Semestre de ingresso</label>{{ form.ingresso_semestre }}{{ form.ingresso_semestre.errors }}</div>
+      <button class="btn btn-primary btn-lg" type="submit">Salvar</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

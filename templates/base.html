@@ -1,0 +1,94 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Trilha USP{% endblock %}</title>
+<meta name="description" content="{% block description %}Plataforma de conhecimento colaborativo da comunidade EACH-USP. Informação acadêmica centralizada, construída por alunos.{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/app.css' %}">
+{% block extra_head %}{% endblock %}
+<link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+</head>
+<body>
+{% include "_sprite.html" %}
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{% url 'core:home' %}" class="brand">
+      <span class="brand-mark">TU</span>
+      <span class="brand-name"><strong>Trilha USP</strong><small>EACH · Sistemas de Informação</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="{% url 'core:home' %}"{% if nav == 'home' %} class="is-active"{% endif %}>Início</a>
+      <a href="{% url 'core:modulos' %}"{% if nav == 'modulos' or nav == 'disciplinas' %} class="is-active"{% endif %}>Módulos</a>
+      <a href="{% url 'core:sobre' %}"{% if nav == 'sobre' %} class="is-active"{% endif %}>Sobre</a>
+      <a href="{% url 'core:documentacao' %}"{% if nav == 'documentacao' %} class="is-active"{% endif %}>Documentação</a>
+      <a href="{% url 'core:contato' %}"{% if nav == 'contato' %} class="is-active"{% endif %}>Contato</a>
+    </nav>
+    <div class="header-actions">
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline" href="{% url 'contas:perfil' %}">{{ user.nome_exibicao|default:"Meu perfil" }}</a>
+        <form method="post" action="{% url 'contas:sair' %}" class="inline-form">{% csrf_token %}<button class="btn btn-gold" type="submit">Sair</button></form>
+      {% else %}
+        <a class="btn btn-gold" href="{% url 'contas:entrar' %}">Entrar com @usp.br</a>
+      {% endif %}
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+        <svg class="icon icon-lg"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer-backdrop" hidden></div>
+
+{% if messages %}
+<div class="container flash-wrap" role="status">
+  {% for m in messages %}<div class="flash flash-{{ m.level_tag }}">{{ m }}</div>{% endfor %}
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="{% url 'core:home' %}" class="brand">
+          <span class="brand-mark">TU</span>
+          <span class="brand-name"><strong>Trilha USP</strong><small>EACH · Sistemas de Informação</small></span>
+        </a>
+        <p>Plataforma de conhecimento colaborativo da comunidade da Escola de Artes, Ciências e Humanidades da Universidade de São Paulo.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navegar</h5>
+        <ul>
+          <li><a href="{% url 'core:modulos' %}">Módulos</a></li>
+          <li><a href="{% url 'core:sobre' %}">Sobre o projeto</a></li>
+          <li><a href="{% url 'core:documentacao' %}">Documentação</a></li>
+          <li><a href="{% url 'core:contato' %}">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Módulos</h5>
+        <ul>
+          <li><a href="{% url 'disciplinas:lista' %}">Disciplinas</a></li>
+          <li><a href="{% url 'core:entidades' %}">Entidades</a></li>
+          <li><a href="{% url 'core:em_breve' %}?m=vagas">Vagas de estágio</a></li>
+          <li><a href="{% url 'core:em_breve' %}?m=carreiras">Possíveis carreiras</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>Projeto estudantil independente. Não é um sistema oficial da Universidade de São Paulo.</p>
+      <p>Dados tratados conforme a LGPD · © <span data-year>2026</span> Trilha USP</p>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'assets/main.js' %}" defer></script>
+{% block after_footer %}{% endblock %}
+</body>
+</html>

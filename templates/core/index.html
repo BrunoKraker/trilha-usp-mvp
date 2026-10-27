@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Trilha USP — Início{% endblock %}
+{% block description %}Plataforma de conhecimento colaborativo da comunidade EACH-USP. Informação acadêmica centralizada, construída por alunos.{% endblock %}
+{% block content %}
+<main>
+
+  <!-- HERO -->
+  <section class="hero hero--light">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+      <span class="eyebrow">Iniciativa estudantil · EACH-USP</span>
+      <h1>Informação acadêmica centralizada, construída pela comunidade da EACH.</h1>
+      <div class="hero-actions">
+        <a class="btn btn-gold btn-lg" href="{% url 'core:modulos' %}">Conhecer os módulos</a>
+        <a class="btn btn-outline btn-lg" href="{% url 'core:sobre' %}">Sobre o projeto</a>
+      </div>
+      </div>
+      <figure class="hero-photo"><img src="{% static 'img/each-campus.svg' %}" width="1024" height="678" alt="Campus da EACH-USP, com edifícios, mural colorido e jardins" fetchpriority="high"></figure>
+    </div>
+  </section>
+
+  <!-- O QUE É -->
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items:start;">
+        <div class="reveal">
+          <span class="eyebrow">O projeto</span>
+          <h2 style="margin-bottom:22px;">Um acervo que melhora a cada semestre.</h2>
+          <div class="prose">
+      <p class="intro-detail">
+        A Trilha USP reúne, em um único ambiente, o que hoje está disperso entre grupos
+        de mensagem, drives pessoais e conversas de corredor: o que cada disciplina
+        cobra, quais materiais funcionam, como as entidades do curso operam e onde
+        estão as oportunidades.
+      </p>
+
+            <p>
+              Todo começo de curso repete o mesmo problema: a informação existe, mas
+              está dispersa. Está no grupo da turma, no drive de um veterano já
+              formado, na resposta que só aparece quando o prazo passou. Quem chega
+              não sabe a quem perguntar; quem já sabe, não tem onde registrar.
+            </p>
+            <p>
+              A Trilha USP existe para resolver isso. Reunimos, por disciplina, os
+              conceitos efetivamente cobrados, o formato das avaliações e materiais
+              produzidos por veteranos. Somamos a isso módulos de cursos
+              recomendados, vagas de estágio, projetos de IC e AEX, entidades,
+              dicas, intercâmbio e possíveis carreiras.
+            </p>
+            <p>
+              Cada contribuição é revisada pela comunidade e permanece disponível
+              para as próximas turmas — em vez de se perder quando o veterano se
+              forma.
+            </p>
+          </div>
+        </div>
+        <aside class="reveal" aria-label="Princípios do projeto">
+          <div class="principle">
+            <h4><svg class="icon"><use href="#i-user"/></svg> Feito por alunos</h4>
+            <p>Todo o conteúdo é produzido por estudantes da EACH. Quem escreve sobre a disciplina, cursou a disciplina.</p>
+          </div>
+          <div class="principle">
+            <h4><svg class="icon"><use href="#i-check"/></svg> Acesso com @usp.br</h4>
+            <p>Somente e-mails institucionais autenticam na plataforma, preservando a credibilidade do conteúdo.</p>
+          </div>
+          <div class="principle">
+            <h4><svg class="icon"><use href="#i-file"/></svg> Material verificado</h4>
+            <p>Antes de ir ao ar, cada contribuição passa por checagem de qualidade, autoria e legalidade do arquivo.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULOS -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">A plataforma</span>
+        <h2>Nove módulos, uma trilha só</h2>
+        <p>Cada módulo resolve uma parte específica da vida acadêmica, da escolha da disciplina ao primeiro estágio.</p>
+      </div>
+
+      <div class="module-grid reveal">
+        <a class="module" href="{% url 'disciplinas:lista' %}">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-book"/></svg></span>
+          <h3>Disciplinas</h3>
+          <p>Dificuldade comunitária, conceitos cobrados, formato de avaliação e materiais de veteranos.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=cursos">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-grad"/></svg></span>
+          <h3>Cursos recomendados</h3>
+          <p>Cursos externos de programação e matemática que fazem sentido no início da graduação.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=vagas">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-briefcase"/></svg></span>
+          <h3>Vagas de estágio</h3>
+          <p>Repositório centralizado de vagas relevantes para alunos com a graduação em andamento.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=ic">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-flask"/></svg></span>
+          <h3>Projetos de IC</h3>
+          <p>Divulgação centralizada de projetos de Iniciação Científica oferecidos por professores.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=aex">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-hands"/></svg></span>
+          <h3>Projetos de AEX</h3>
+          <p>Atividades extensionistas para completar horas complementares e recompensar veteranos.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:entidades' %}">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-landmark"/></svg></span>
+          <h3>Entidades</h3>
+          <p>Centros acadêmicos, atléticas, empresas juniores e grupos de extensão: como participar.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=dicas">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-bulb"/></svg></span>
+          <h3>Dicas</h3>
+          <p>Orientações de veteranos sobre requerimentos, rotina de estudo e ingresso em projetos.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=intercambio">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-globe"/></svg></span>
+          <h3>Intercâmbio</h3>
+          <p>Informações sobre programas de intercâmbio e relatos de quem já passou pela experiência.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=carreiras">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-compass"/></svg></span>
+          <h3>Possíveis carreiras</h3>
+          <p>Trajetórias possíveis a partir de Sistemas de Informação e como se direcionar em cada uma.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta reveal">
+        <div>
+          <h3>Tem um resumo que salvou o seu semestre?</h3>
+          <p>Compartilhe com quem está chegando agora. Todo material passa por revisão antes de ser publicado.</p>
+        </div>
+        <button class="btn btn-gold btn-lg" type="button">Contribuir com material</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

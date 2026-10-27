@@ -1,0 +1,26 @@
+# Blueprint do Render (plano gratuito). O banco fica no Neon (DATABASE_URL), não no Render.
+services:
+  - type: web
+    name: trilha-usp
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi --workers 2 --timeout 30
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: ALLOWED_EMAIL_DOMAINS
+        value: usp.br

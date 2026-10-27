@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sobre — Trilha USP{% endblock %}
+{% block content %}
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="{% url 'core:home' %}">Trilha USP</a> · <span>Sobre</span></div>
+      <h1>Sobre o projeto</h1>
+      <p class="lead">O Trilha USP nasceu como trabalho da disciplina de Gestão de Projetos de TI e segue como iniciativa independente de um grupo de estudantes de Sistemas de Informação da EACH-USP.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items:start;">
+        <div class="reveal">
+          <span class="eyebrow">Missão</span>
+          <h2 style="margin-bottom:22px;">Reduzir a dispersão de informação acadêmica</h2>
+          <div class="prose">
+            <p>
+              A informação necessária para navegar o curso está dispersa entre canais
+              informais e sistemas institucionais fragmentados. Calouros levam meses
+              para entender como o curso funciona; veteranos não têm um canal
+              centralizado para compartilhar experiências e oportunidades.
+            </p>
+            <p>
+              O Trilha USP centraliza esse conhecimento em uma plataforma colaborativa,
+              reduzindo o tempo gasto na busca por informação e fortalecendo a troca
+              entre veteranos e calouros.
+            </p>
+            <p>
+              O projeto é conduzido por cinco estudantes do sexto semestre.
+            </p>
+          </div>
+        </div>
+        <aside class="reveal" aria-label="Princípios">
+          <div class="principle">
+            <h4><svg class="icon"><use href="#i-user"/></svg> Feito por alunos</h4>
+            <p>Todo o conteúdo é produzido por estudantes da EACH. Quem escreve sobre a disciplina, cursou a disciplina.</p>
+          </div>
+          <div class="principle">
+            <h4><svg class="icon"><use href="#i-check"/></svg> Acesso com @usp.br</h4>
+            <p>Somente e-mails institucionais autenticam na plataforma, preservando a credibilidade do conteúdo.</p>
+          </div>
+          <div class="principle">
+            <h4><svg class="icon"><use href="#i-file"/></svg> Material verificado</h4>
+            <p>Antes de ir ao ar, cada contribuição passa por checagem de qualidade, autoria e legalidade do arquivo.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Transparência</span>
+        <h2>Compromissos institucionais</h2>
+      </div>
+      <div class="note reveal">
+        <svg class="icon icon-lg"><use href="#i-info"/></svg>
+        <span>
+          <strong>Projeto estudantil independente.</strong>
+          O Trilha USP não possui vínculo institucional oficial com a Universidade de São Paulo.
+          Os indicadores de dificuldade das disciplinas são comunitários e não estão vinculados
+          a professores específicos. A conformidade com a LGPD permanece como pendência
+          registrada, a ser aprofundada em fase posterior do projeto.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Equipe</span>
+        <h2>Quem somos</h2>
+        <p>Cinco estudantes do sexto semestre do Bacharelado em Sistemas de Informação da EACH-USP.</p>
+      </div>
+
+      <div class="team-grid reveal" data-team-carousel role="region" aria-roledescription="carrossel" aria-label="Integrantes do Trilha USP">
+        <article class="member">
+          <div class="member-photo">
+            <span class="initials">BR</span>
+            <img src="{% static 'img/equipe/Bruno.jpg' %}" alt="Foto de Bruno" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="member-info">
+            <h4>Bruno de Andrade Gama Kraker</h4>
+            <span class="member-nusp">NUSP 8101891</span>
+            <p class="member-bio">Suposto estudante de SI no 6° período!<br>
+              Curto jogar futebol, ouvir um pagode e estudar. Ainda me achando no mundo da computação, mas tentando ingressar na área de dados.<br>
+              Também gosto de sofrer, sentir raiva e quase infartar assistindo jogos do Corinthians!</p>
+          </div>
+        </article>
+
+        <article class="member">
+          <div class="member-photo">
+            <span class="initials">PS</span>
+            <img src="{% static 'img/equipe/Pedro.jpg' %}" alt="Foto de Pedro" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="member-info">
+            <h4>Pedro Henryk Bezerra Souza</h4>
+            <span class="member-nusp">NUSP 15553440</span>
+            <p class="member-bio"> Sou corinthiano, gosto de andar de skate, pokemon e criar lembranças com quem é importante pra mim. <br>
+                Gosto de fazer novas amizades e no tempo livre jogar com os amigos.</p>
+          </div>
+        </article>
+
+        <article class="member">
+          <div class="member-photo">
+            <span class="initials">RM</span>
+            <img src="{% static 'img/equipe/Rodrigo.jpg' %}" alt="Foto de Rodrigo" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="member-info">
+            <h4>Rodrigo Franco de Moraes</h4>
+            <span class="member-nusp">NUSP 14606450</span>
+            <p class="member-bio">Corinthiano como todos outros bons membros do grupo! Curto muito todo tipo de esporte, música e tecnologia<br>
+            Adoro rolês aleatórios e tento sempre levar a vida com curiosidade e interesse!</p>
+          </div>
+        </article>
+
+        <article class="member">
+          <div class="member-photo">
+            <span class="initials">RJ</span>
+            <img src="{% static 'img/equipe/Romulo.jpg' %}" alt="Foto de Rômulo" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="member-info">
+            <h4>Rômulo Maurício Fonseca Júnior</h4>
+            <span class="member-nusp">NUSP 15553801</span>
+            <p class="member-bio">Corintiano, maloqueiro e sofredor!<br>
+              Apaixonado pelos esportes e pela arte! Dança, música, vôlei e futebol sempre estiveram presentes na minha vida.<br>
+              Gosto muito de testar novos caminhos e soluções, independente da área da minha vida em que estejam sendo aplicadas.</p>
+          </div>
+        </article>
+
+        <article class="member">
+          <div class="member-photo">
+            <span class="initials">TI</span>
+            <img src="{% static 'img/equipe/Thales.jpg' %}" alt="Foto de Thales" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="member-info">
+            <h4>Thales Iamamura</h4>
+            <span class="member-nusp">NUSP 11915727</span>
+            <p class="member-bio">Poliesportista e apaixonado por aventuras!<br>
+              Cresci jogando beisebol, vôlei e diversos esportes coletivos. Não perco uma oportunidade para fazer uma trilha ou uma noite de acampamento!<br>
+              Sonho em viajar o mundo, conhecendo as mais diferentes pessoas, costumes e culturas ao redor do mundo!</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

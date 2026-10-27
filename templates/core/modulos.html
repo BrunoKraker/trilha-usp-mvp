@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Módulos — Trilha USP{% endblock %}
+{% block content %}
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="{% url 'core:home' %}">Trilha USP</a> · <span>Módulos</span></div>
+      <h1>Os nove módulos da plataforma</h1>
+      <p class="lead">Cada módulo resolve uma parte específica da vida acadêmica — da escolha de disciplinas ao direcionamento de carreira. Nem todos estão ativos nesta fase do MVP.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="module-grid reveal">
+        <a class="module" href="{% url 'disciplinas:lista' %}">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-book"/></svg></span>
+          <h3>Disciplinas</h3>
+          <p>Ambiente por disciplina com indicador comunitário de dificuldade, conceitos cobrados, formato de avaliação e materiais produzidos por veteranos.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=cursos">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-grad"/></svg></span>
+          <h3>Cursos recomendados</h3>
+          <p>Cursos externos de programação e matemática que fazem sentido começar no início da graduação.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=vagas">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-briefcase"/></svg></span>
+          <h3>Vagas de estágio</h3>
+          <p>Repositório centralizado de vagas relevantes para alunos com a graduação em andamento.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=ic">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-flask"/></svg></span>
+          <h3>Projetos de IC</h3>
+          <p>Divulgação centralizada de projetos de Iniciação Científica oferecidos por professores.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=aex">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-hands"/></svg></span>
+          <h3>Projetos de AEX</h3>
+          <p>Atividades extensionistas para completar horas complementares e recompensar veteranos que contribuem.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:entidades' %}">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-landmark"/></svg></span>
+          <h3>Entidades</h3>
+          <p>Informações centralizadas sobre centros acadêmicos, atléticas, empresas juniores e grupos de extensão.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=dicas">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-bulb"/></svg></span>
+          <h3>Dicas</h3>
+          <p>Orientações de veteranos sobre requerimentos, rotina de estudo e ingresso em projetos de pesquisa.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=intercambio">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-globe"/></svg></span>
+          <h3>Intercâmbio</h3>
+          <p>Informações sobre programas de intercâmbio e relatos de quem já passou pela experiência.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="module" href="{% url 'core:em_breve' %}?m=carreiras">
+          <span class="module-ic"><svg class="icon icon-lg"><use href="#i-compass"/></svg></span>
+          <h3>Possíveis carreiras</h3>
+          <p>Trajetórias possíveis a partir de Sistemas de Informação e como se direcionar em cada uma.</p>
+          <span class="module-go">Abrir <svg class="icon icon-sm"><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

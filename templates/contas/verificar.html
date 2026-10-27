@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Confirmar acesso — Trilha USP{% endblock %}
+{% block content %}
+<main>
+  <div class="auth-box">
+    {% if valido %}
+      <h1>Confirmar acesso</h1>
+      <p>Clique no botão para entrar no Trilha USP.</p>
+      <form method="post" class="form">{% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button class="btn btn-primary btn-lg" type="submit">Entrar</button>
+      </form>
+    {% else %}
+      <h1>Link inválido ou expirado</h1>
+      <p>Esse link já foi usado ou venceu. <a href="{% url 'contas:entrar' %}">Peça um novo link</a>.</p>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contato — Trilha USP{% endblock %}
+{% block content %}
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="{% url 'core:home' %}">Trilha USP</a> · <span>Contato</span></div>
+      <h1>Contato</h1>
+      <p class="lead">Dúvidas, sugestões de conteúdo, propostas de parceria ou relatos de problemas. Todo retorno é lido pela equipe.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items:start;gap:56px;">
+
+        <div class="reveal">
+          <span class="eyebrow">Formulário</span>
+          <h2 style="margin-bottom:22px;">Envie uma mensagem</h2>
+          <form class="form" method="post" action="{% url 'core:contato' %}">
+            {% csrf_token %}
+            <div class="field"><label for="id_nome">Nome</label>{{ form.nome }}{{ form.nome.errors }}</div>
+            <div class="field"><label for="id_email">E-mail institucional</label>{{ form.email }}{{ form.email.errors }}</div>
+            <div class="field"><label for="id_assunto">Assunto</label>{{ form.assunto }}</div>
+            <div class="field"><label for="id_mensagem">Mensagem</label>{{ form.mensagem }}{{ form.mensagem.errors }}</div>
+            <div class="hp" aria-hidden="true">{{ form.website }}</div>
+            <div><button class="btn btn-primary btn-lg" type="submit">Enviar mensagem</button></div>
+          </form>
+        </div>
+
+        <aside class="reveal">
+          <span class="eyebrow">Canais diretos</span>
+          <h2 style="margin-bottom:22px;">Outras formas de contato</h2>
+          <div class="prose">
+            <p>
+              Para questões acadêmicas específicas, recomendamos procurar diretamente o centro acadêmico do curso.
+            </p>
+          </div>
+          <div class="note" style="margin-top:24px;">
+            <svg class="icon icon-lg"><use href="#i-info"/></svg>
+            <span>
+              <strong>Prazo de resposta.</strong>
+              Mensagens são respondidas em até cinco dias úteis pela equipe voluntária do projeto.
+            </span>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}{% if selecionada %}{{ selecionada.nome }} — {% endif %}Disciplinas — Trilha USP{% endblock %}
+{% block content %}
+<main>
+  <div class="workspace">
+
+    <aside class="list-pane" aria-label="Lista de disciplinas">
+      <form method="get" action="{% url 'disciplinas:lista' %}">
+        <input type="search" name="q" value="{{ q }}" placeholder="Buscar disciplina" aria-label="Buscar disciplina">
+      </form>
+      {% for sem, itens in grupos %}
+        <div class="semester-label">{% if sem %}{{ sem }}º semestre{% else %}Optativas / sem semestre fixo{% endif %}</div>
+        {% for d in itens %}
+          <a class="disc-item{% if selecionada and d.pk == selecionada.pk %} selected{% endif %}" href="{% url 'disciplinas:detalhe' d.codigo %}{% if q %}?q={{ q|urlencode }}{% endif %}">
+            <span class="disc-code">{{ d.codigo }}</span>
+            <div class="disc-meta">
+              <h4>{{ d.nome }}</h4>
+              <span>{% if d.media %}{{ d.media|floatformat:1 }} / 5 · {{ d.n_aval }} aval.{% else %}Sem avaliações{% endif %}</span>
+            </div>
+            <span class="diff-dot {% if d.media %}{% if d.media < 2.5 %}baixa{% elif d.media <= 3.5 %}media{% else %}alta{% endif %}{% else %}sem{% endif %}" aria-hidden="true"></span>
+          </a>
+        {% endfor %}
+      {% empty %}
+        <p class="muted" style="padding:12px">Nenhuma disciplina encontrada.</p>
+      {% endfor %}
+    </aside>
+
+    <section class="detail-pane">
+      <div class="crumb"><a href="{% url 'core:modulos' %}">Módulos</a> · <span>Disciplinas</span></div>
+      {% if not selecionada %}
+        <div class="empty"><h2>Catálogo em preparação</h2><p>As disciplinas serão cadastradas pela equipe do projeto.</p></div>
+      {% else %}
+      <header class="detail-head">
+        <div>
+          <h1>{{ selecionada.nome }}</h1>
+          <div class="detail-tags">
+            <span><strong>{{ selecionada.codigo }}</strong></span>
+            {% if selecionada.semestre_ideal %}<span>{{ selecionada.semestre_ideal }}º semestre</span>{% endif %}
+            <span>{% if selecionada.obrigatoria %}Obrigatória{% else %}Optativa{% endif %}</span>
+            <span>{{ selecionada.creditos }} créditos</span>
+          </div>
+        </div>
+        <div class="difficulty">
+          <div class="label">Dificuldade comunitária</div>
+          <div class="diff-bar"><div class="diff-bar-fill {{ classe }}" style="width:{{ largura }}%"></div></div>
+          <div class="score">{% if media %}{{ media|floatformat:1 }} / 5 · {{ selecionada.n_aval }} avaliaç{{ selecionada.n_aval|pluralize:"ão,ões" }}{% else %}Ainda sem avaliações{% endif %}</div>
+          <div class="note">Indicador não vinculado a professor</div>
+        </div>
+      </header>
+
+      {% if selecionada.ementa %}
+      <div class="block">
+        <h5 class="block-title">Ementa</h5>
+        <p>{{ selecionada.ementa }}</p>
+      </div>
+      {% endif %}
+
+      <div class="materials-section">
+        <h5 class="block-title">Resumos e dicas de veteranos</h5>
+        {% if resumos %}
+        <div class="material-grid">
+          {% for r in resumos %}
+          <article class="material-card">
+            <div class="mtype"><svg class="icon icon-sm"><use href="#{% if r.tipo == 'dica' %}i-note{% else %}i-file{% endif %}"/></svg> {{ r.get_tipo_display }}</div>
+            <h6>{{ r.titulo }}</h6>
+            <span class="by">{{ r.autor.nome_exibicao|default:"Aluno" }} · {{ r.criado_em|date:"Y" }}</span>
+            {% if ler_corpo %}<p class="resumo-body">{{ r.corpo|linebreaksbr }}</p>
+            {% else %}<p class="muted">Entre com seu e-mail @usp.br para ler.</p>{% endif %}
+            <div class="foot">
+              {% if r.verificado %}<span class="status ok"><svg class="icon icon-sm"><use href="#i-check"/></svg> verificado</span>
+              {% else %}<span class="status pending"><svg class="icon icon-sm"><use href="#i-clock"/></svg> sem verificação</span>{% endif %}
+              {% if user.is_authenticated and r.autor_id == user.id or user.is_staff %}
+              <form method="post" action="{% url 'disciplinas:excluir_resumo' selecionada.codigo r.pk %}" class="inline-form" onsubmit="return confirm('Excluir este resumo?')">{% csrf_token %}<button class="btn-link" type="submit">Excluir</button></form>
+              {% endif %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        {% else %}
+          <div class="empty"><p>Ainda não há resumos para esta disciplina.</p></div>
+        {% endif %}
+      </div>
+
+      <div class="contribute">
+        {% if pode %}
+          <h5 class="block-title">Sua avaliação de dificuldade</h5>
+          <form method="post" action="{% url 'disciplinas:avaliar' selecionada.codigo %}">{% csrf_token %}
+            <div class="rate-row" role="radiogroup" aria-label="Nota de 1 a 5">
+              {% for n in "12345" %}<label><input type="radio" name="nota" value="{{ n }}" {% if minha and minha.nota|stringformat:"d" == n %}checked{% endif %} required><span>{{ n }}</span></label>{% endfor %}
+              <button class="btn btn-outline" type="submit">{% if minha %}Atualizar{% else %}Avaliar{% endif %}</button>
+            </div>
+            <p class="muted">1 = muito tranquila · 5 = muito difícil.{% if minha %} Você pode atualizar mais {{ restantes }} vez{{ restantes|pluralize:"es" }}.{% endif %}</p>
+          </form>
+          <h5 class="block-title" style="margin-top:22px">Publicar resumo ou dica</h5>
+          <form method="post" action="{% url 'disciplinas:publicar' selecionada.codigo %}" class="form">{% csrf_token %}
+            <div class="field"><label for="id_tipo">Tipo</label>{{ form_resumo.tipo }}</div>
+            <div class="field"><label for="id_titulo">Título</label>{{ form_resumo.titulo }}</div>
+            <div class="field"><label for="id_corpo">Texto</label>{{ form_resumo.corpo }}</div>
+            <button class="btn btn-primary" type="submit">Publicar</button>
+          </form>
+        {% else %}
+          <p class="muted" style="margin:0">{{ motivo }}{% if not user.is_authenticated %} <a href="{% url 'contas:entrar' %}?next={{ request.path|urlencode }}">Entrar</a>{% elif not user.perfil_completo %} <a href="{% url 'contas:perfil' %}">Completar perfil</a>{% endif %}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </section>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Build do Render: instala dependências, coleta estáticos e aplica migrações.
+set -o errexit
+pip install -r requirements.txt
+python manage.py collectstatic --noinput
+python manage.py migrate --noinput

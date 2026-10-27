@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Confira seu e-mail — Trilha USP{% endblock %}
+{% block content %}
+<main>
+  <div class="auth-box">
+    <h1>Confira seu e-mail</h1>
+    <p>Se o endereço informado estiver correto, você receberá em instantes um link de acesso válido por alguns minutos. Verifique também o spam.</p>
+    <p><a href="{% url 'contas:entrar' %}">Voltar</a></p>
+  </div>
+</main>
+{% endblock %}

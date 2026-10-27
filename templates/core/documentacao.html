@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Documentação — Trilha USP{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'assets/pdf-preview.css' %}">{% endblock %}
+{% block content %}
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="{% url 'core:home' %}">Trilha USP</a> · <span>Documentação</span></div>
+      <h1>Documentação do projeto</h1>
+      <p class="lead">Artefatos produzidos pelo grupo ao longo da disciplina ACH2027 — Gestão de Projetos de Tecnologia da Informação, sob orientação da Prof.ª Violeta Sun.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="doc-grid reveal">
+
+        <article class="doc-card">
+          <span class="doc-cat">Objetivos SMART e Canvas</span>
+          <h3>Objetivos SMART e Canvas do projeto</h3>
+          <p>Documento que apresenta os objetivos SMART e o Project Model Canvas do Trilha USP, contemplando justificativa, benefícios esperados, entregáveis, stakeholders e riscos mapeados.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/SMART_TrilhaUSP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 302 KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Escopo do projeto</span>
+          <h3>Escopo completo</h3>
+          <p>Visão geral, os nove módulos da plataforma e as decisões estratégicas de legitimidade institucional, autenticação, LGPD, governança e sustentabilidade do projeto.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/canvas_trilha_usp.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 4 KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Termo de Abertura (TAP)</span>
+          <h3>Termo de Abertura de Projeto</h3>
+          <p>Documento que formaliza o início do projeto, detalhando justificativa, escopo do MVP, cronograma, equipe, custos e matriz de riscos.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/TAP_Trilha_USP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 204 KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Cronograma</span>
+          <h3>Diagrama de Gantt</h3>
+          <p>Cronograma visual das atividades do projeto, organizado em sete estágios de controle com suas respectivas datas e entregas.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/Gantt_Trilha_USP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 27 KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Gestão de Recursos</span>
+          <h3>Plano de Gestão de Recursos</h3>
+          <p>Matriz RACI das principais atividades, plano de capacidade semanal da equipe e registro de risco de recursos, com ação de resposta e responsável pelo acompanhamento.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/Gestao_de_Recursos_Trilha_USP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 323 KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Gestão da Qualidade</span>
+          <h3>Plano de Gerenciamento da Qualidade (PGQ)</h3>
+          <p>Plano que define objetivos, responsabilidades, padrões, revisões e testes para garantir e controlar a qualidade das entregas do Trilha USP.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/PGQ_Trilha_USP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 219 KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Plano de custos</span>
+          <h3>Plano de Gerenciamento de Custos</h3>
+          <p>Estrutura de controle, limiares de decisão, medição por valor agregado, reservas e previsão de custos do projeto.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/Custos_TrilhaUSP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 196KB</span>
+          </div>
+        </article>
+
+        <article class="doc-card">
+          <span class="doc-cat">Gestão das Comunicações</span>
+          <h3>Plano de Gerenciamento das Comunicações</h3>
+          <p>Partes interessadas, matriz de comunicação, canais, reuniões, confirmação de entendimento e tratamento de falhas de comunicação do projeto.</p>
+          <div class="doc-foot">
+            <div class="pdf-card-actions">
+              <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>
+              <a class="btn btn-outline" href="{% static 'docs/Plano_de_Gerenciamento_das_Comunicacoes_Trilha_USP.pdf' %}" download>
+              Baixar <svg class="icon icon-sm"><use href="#i-download"/></svg>
+            </a>
+            </div>
+            <span class="doc-meta">PDF · 149 KB</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}
+{% block after_footer %}
+<dialog class="pdf-modal" id="pdf-preview" aria-labelledby="pdf-title" aria-describedby="pdf-help">
+  <header class="pdf-modal-header">
+    <h2 id="pdf-title">Visualização do documento</h2>
+    <a class="btn btn-outline pdf-header-download" data-pdf-download download>Baixar PDF</a>
+    <button class="pdf-close" id="pdf-close" type="button" aria-label="Fechar visualização"><span aria-hidden="true">×</span></button>
+  </header>
+  <p class="visually-hidden" id="pdf-help">Prévia visual em canvas. Use os controles para trocar de página e ampliar. Para leitura no seu leitor de PDF, utilize Baixar PDF. Pressione Escape para fechar.</p>
+  <div class="pdf-toolbar" aria-label="Controles do documento">
+    <button class="btn btn-outline" id="pdf-previous" type="button" disabled>Anterior</button>
+    <span class="pdf-page-label" id="pdf-page-label">Carregando…</span>
+    <button class="btn btn-outline" id="pdf-next" type="button" disabled>Próxima</button>
+    <label for="pdf-zoom">Zoom</label>
+    <select id="pdf-zoom" disabled><option value="1">Ajustar à largura</option><option value="1.25">125%</option><option value="1.5">150%</option><option value="2">200%</option></select>
+  </div>
+  <div class="pdf-stage" id="pdf-stage" tabindex="0" aria-label="Página do PDF" aria-busy="false">
+    <canvas id="pdf-canvas" role="img" hidden></canvas>
+    <div class="pdf-error" id="pdf-error" hidden>
+      <p>Não foi possível carregar a prévia deste documento. Você pode baixar o PDF e abri-lo no seu leitor de preferência.</p>
+      <a class="btn btn-primary" data-pdf-download download>Baixar documento</a>
+    </div>
+  </div>
+  <p class="pdf-status" id="pdf-status" role="status" aria-live="polite"></p>
+</dialog>
+<script src="{% static 'assets/pdf-preview.js' %}" defer></script>
+{% endblock %}
