@@ -6,13 +6,13 @@ from core.models import MensagemContato
 
 class PaginasTest(TestCase):
     def test_paginas_publicas_abrem(self):
-        for nome in ["core:home", "core:modulos", "core:entidades", "core:em_breve", "core:sobre",
+        for nome in ["core:home", "core:modulos", "core:em_breve", "core:sobre",
                      "core:documentacao", "core:contato", "disciplinas:lista", "contas:entrar"]:
             r = self.client.get(reverse(nome))
             self.assertEqual(r.status_code, 200, nome)
 
     def test_sem_mencao_a_ej_nos_textos_do_trilha(self):
-        for nome in ["core:sobre", "core:contato", "core:entidades"]:
+        for nome in ["core:sobre", "core:contato"]:
             html = self.client.get(reverse(nome)).content.decode()
             self.assertNotIn("apoio operacional da empresa júnior", html)
             self.assertNotIn("e-mail institucional da EJ", html)
@@ -38,3 +38,12 @@ class PaginasTest(TestCase):
         from django.contrib.staticfiles import finders
         for f in ["assets/styles.css", "assets/app.css", "docs/TAP_Trilha_USP.pdf", "img/equipe/Bruno.jpg"]:
             self.assertTrue(finders.find(f), f)
+
+    def test_entidades_abre_como_modulo_em_breve(self):
+        response = self.client.get(
+            reverse("core:em_breve"),
+            {"m": "entidades"},
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Entidades")
