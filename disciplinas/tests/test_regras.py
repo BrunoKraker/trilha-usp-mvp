@@ -191,3 +191,22 @@ class CsrfTest(BaseCase):
         c.force_login(self.veterano)
         r = c.post(reverse("disciplinas:avaliar", args=["T3"]), {"nota": 5})
         self.assertEqual(r.status_code, 403)
+
+
+class ImportacaoTest(TestCase):
+    def test_importa_catalogo_de_si_do_repositorio(self):
+        from pathlib import Path
+
+        from django.conf import settings
+        from django.core.management import call_command
+        call_command("importar_disciplinas", str(Path(settings.BASE_DIR) / "data" / "disciplinas_si.csv"), verbosity=0)
+        self.assertEqual(Disciplina.objects.count(), 35)
+        d = Disciplina.objects.get(codigo="ACH2017")
+        self.assertEqual((d.creditos, d.creditos_trabalho, d.semestre_ideal), (0, 8, 5))
+        self.assertEqual(d.creditos_texto, "8 trabalho")
+        self.assertEqual(Disciplina.objects.get(codigo="ACH2001").creditos_texto, "4 créditos aula + 2 trabalho")
+        self.assertIsNone(Disciplina.objects.get(codigo="ACH0102").semestre_ideal)
+        self.assertFalse(Disciplina.objects.get(codigo="ACH0102").obrigatoria)
+        # idempotente
+        call_command("importar_disciplinas", str(Path(settings.BASE_DIR) / "data" / "disciplinas_si.csv"), verbosity=0)
+        self.assertEqual(Disciplina.objects.count(), 35)

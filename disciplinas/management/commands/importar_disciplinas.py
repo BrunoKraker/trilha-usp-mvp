@@ -6,7 +6,7 @@ from disciplinas.models import Disciplina
 
 
 class Command(BaseCommand):
-    help = "Importa/atualiza disciplinas de um CSV (UTF-8) com colunas: codigo,nome,semestre,creditos,obrigatoria,ementa"
+    help = "Importa/atualiza disciplinas de um CSV (UTF-8) com colunas: codigo,nome,semestre,creditos,creditos_trabalho,obrigatoria,ementa"
 
     def add_arguments(self, parser):
         parser.add_argument("arquivo")
@@ -28,6 +28,7 @@ class Command(BaseCommand):
                             "nome": linha["nome"].strip(),
                             "semestre_ideal": int(sem) if sem else None,
                             "creditos": int((linha.get("creditos") or "4").strip()),
+                            "creditos_trabalho": int((linha.get("creditos_trabalho") or "0").strip()),
                             "obrigatoria": obrig,
                             "ementa": (linha.get("ementa") or "").strip(),
                         })

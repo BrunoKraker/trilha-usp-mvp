@@ -12,7 +12,8 @@ class Disciplina(models.Model):
         "semestre ideal", null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(12)],
         help_text="Semestre da grade em que a disciplina é oferecida. Vazio = optativa/sem semestre fixo.")
     obrigatoria = models.BooleanField("obrigatória", default=True)
-    creditos = models.PositiveSmallIntegerField("créditos", default=4)
+    creditos = models.PositiveSmallIntegerField("créditos aula", default=4)
+    creditos_trabalho = models.PositiveSmallIntegerField("créditos trabalho", default=0)
     ativa = models.BooleanField(default=True)
 
     class Meta:
@@ -20,6 +21,15 @@ class Disciplina(models.Model):
 
     def __str__(self):
         return f"{self.codigo} — {self.nome}"
+
+    @property
+    def creditos_texto(self):
+        partes = []
+        if self.creditos:
+            partes.append(f"{self.creditos} crédito{'s' if self.creditos != 1 else ''} aula")
+        if self.creditos_trabalho:
+            partes.append(f"{self.creditos_trabalho} trabalho")
+        return " + ".join(partes) or "sem créditos"
 
 
 class Resumo(models.Model):

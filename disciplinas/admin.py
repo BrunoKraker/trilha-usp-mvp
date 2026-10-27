@@ -6,7 +6,7 @@ from .models import AvaliacaoDificuldade, Disciplina, Resumo
 
 @admin.register(Disciplina)
 class DisciplinaAdmin(admin.ModelAdmin):
-    list_display = ("codigo", "nome", "semestre_ideal", "obrigatoria", "creditos", "ativa")
+    list_display = ("codigo", "nome", "semestre_ideal", "obrigatoria", "creditos", "creditos_trabalho", "ativa")
     list_filter = ("semestre_ideal", "obrigatoria", "ativa")
     search_fields = ("codigo", "nome")
 
