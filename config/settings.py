@@ -127,6 +127,10 @@ EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_TIMEOUT = 10
+# Envio por API (Brevo) — necessário no Render grátis, que bloqueia SMTP. Use:
+#   EMAIL_BACKEND=contas.email_backends.BrevoEmailBackend  e  BREVO_API_KEY=...
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+BREVO_API_URL = os.environ.get("BREVO_API_URL", "https://api.brevo.com/v3/smtp/email")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER or "trilha-usp@localhost")
 
 # --- Regras do Trilha USP ---

@@ -38,14 +38,20 @@ python manage.py importar_disciplinas data/minhas_disciplinas.csv
 ```
 É idempotente (reimportar atualiza). Também dá para cadastrar pelo `/admin/`. Semestre vazio = optativa.
 
+## Link de login manual (quando o e-mail falhar)
+```bash
+python manage.py gerar_link aluno@usp.br --base-url https://SEU-SITE.onrender.com
+```
+Rode com `DATABASE_URL` apontando para o banco de produção. O link vale 15 minutos e só uma vez.
+
 ## Moderadores
 No `/admin/` > Usuários: marque **"moderador/admin"** e adicione ao grupo **Moderadores**.
 
 ## Publicar (Render grátis + Neon grátis)
 1. **Neon**: crie o projeto, copie a connection string (`?sslmode=require`) → `DATABASE_URL`.
-2. **Gmail**: conta do projeto com verificação em 2 etapas e **senha de app** → `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `DEFAULT_FROM_EMAIL`.
+2. **E-mail (Brevo, via API)**: o Render grátis **bloqueia SMTP** (portas 25/465/587), então Gmail por SMTP não funciona. Crie conta no Brevo, verifique um remetente, gere uma chave de API → `BREVO_API_KEY`, `DEFAULT_FROM_EMAIL`, `EMAIL_BACKEND=contas.email_backends.BrevoEmailBackend`.
 3. **GitHub**: suba este repositório (o `.env` está no `.gitignore`).
-4. **Render**: New > Blueprint apontando para o repositório (`render.yaml`). Preencha as variáveis marcadas como "sync: false". O build roda `./build.sh` (instala, coleta estáticos, migra).
+4. **Render**: New > Blueprint apontando para o repositório (`render.yaml`). Preencha as variáveis marcadas como "sync: false" (`DATABASE_URL`, `BREVO_API_KEY`, `DEFAULT_FROM_EMAIL`). O build roda `./build.sh` (instala, coleta estáticos, migra).
 5. Crie o superusuário: no Render, aba *Shell* (pode exigir plano pago; alternativa: rode `createsuperuser` localmente com `DATABASE_URL` do Neon).
 6. Importe o catálogo (comando acima, também apontando `DATABASE_URL` para o Neon).
 7. Teste o login com um e-mail `@usp.br` **real** e confira se o link chega (e não cai no spam).

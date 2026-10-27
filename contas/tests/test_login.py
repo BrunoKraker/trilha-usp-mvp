@@ -97,3 +97,21 @@ class LoginTest(TestCase):
     def test_logs_nao_vazam_link(self):
         with self.assertNoLogs("contas.views", level="INFO"):
             pedir_link(self.client, "e@usp.br")
+
+
+class GerarLinkTest(TestCase):
+    def test_comando_gera_link_valido(self):
+        from io import StringIO
+        from django.core.management import call_command
+        out = StringIO()
+        call_command("gerar_link", "Aluno@usp.br", "--base-url", "https://site.exemplo", stdout=out)
+        link = out.getvalue().splitlines()[0]
+        self.assertTrue(link.startswith("https://site.exemplo/entrar/verificar/"))
+        r = self.client.post(link.replace("https://site.exemplo", ""))
+        self.assertIn("_auth_user_id", self.client.session)
+
+    def test_comando_recusa_dominio_externo(self):
+        from django.core.management import call_command
+        from django.core.management.base import CommandError
+        with self.assertRaises(CommandError):
+            call_command("gerar_link", "x@gmail.com", "--base-url", "https://site.exemplo")
