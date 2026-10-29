@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Privacidade — Trilha USP{% endblock %}
+{% block content %}
+<main id="conteudo" tabindex="-1">
+  <section class="section">
+    <div class="container legal" style="max-width:820px">
+      <h1>Privacidade</h1>
+      <p><strong>Última atualização:</strong> 27/10/2026</p>
+      <p>O Trilha USP é um projeto estudantil independente de alunos de Sistemas de Informação da EACH-USP. Não é um sistema oficial da Universidade de São Paulo. Esta página explica quais dados pessoais tratamos, por quê, com quem compartilhamos e como você exerce seus direitos, nos termos da Lei Geral de Proteção de Dados (LGPD).</p>
+
+      <h2>Quem é responsável</h2>
+      <p>A equipe do projeto Trilha USP (estudantes da EACH-USP). Para qualquer pedido ou dúvida sobre seus dados, use o <a href="{% url 'core:contato' %}">formulário de contato</a>.</p>
+
+      <h2>Dados que coletamos e para quê</h2>
+      <table>
+        <thead><tr><th>Dado</th><th>Finalidade</th></tr></thead>
+        <tbody>
+          <tr><td>E-mail institucional (@usp.br)</td><td>Identificar você e enviar o link de acesso. Sem ele não é possível usar a conta.</td></tr>
+          <tr><td>Nome de exibição</td><td>Mostrar a autoria dos resumos e dicas que você publicar. Escolha um nome que aceite tornar público.</td></tr>
+          <tr><td>Ano e semestre de ingresso</td><td>Liberar a contribuição apenas em disciplinas que você já deveria ter cursado.</td></tr>
+          <tr><td>Resumos, dicas e notas de dificuldade</td><td>Conteúdo que você mesmo publica na plataforma.</td></tr>
+          <tr><td>Nome, e-mail e texto enviados pelo formulário de contato</td><td>Responder à sua mensagem.</td></tr>
+          <tr><td>Dados técnicos: um código irreversível (hash) derivado do seu IP e registros do servidor</td><td>Segurança e limites contra abuso (por exemplo, excesso de pedidos de acesso). Não guardamos o IP em texto.</td></tr>
+        </tbody>
+      </table>
+      <p>Não coletamos CPF, RG, número USP, telefone, localização nem dados sensíveis, e não usamos ferramentas de análise de audiência nem publicidade.</p>
+
+      <h2>Cookies</h2>
+      <p>Usamos apenas cookies técnicos, necessários para manter você conectado (sessão) e para proteger os formulários contra falsificação (CSRF). Não usamos cookies de rastreamento.</p>
+
+      <h2>Com quem compartilhamos</h2>
+      <p>Usamos prestadores de serviço (operadores) apenas para o funcionamento do site: <strong>Brevo</strong> (envio do e-mail com o link de acesso), <strong>Render</strong> (hospedagem do site) e <strong>Neon</strong> (banco de dados). Esses serviços podem processar dados em servidores fora do Brasil. Não vendemos dados nem os compartilhamos para fins de publicidade. Os resumos e dicas publicados ficam visíveis aos usuários da plataforma com o seu nome de exibição.</p>
+
+      <h2>Por quanto tempo guardamos</h2>
+      <ul>
+        <li>Conta e conteúdo publicado: até você excluir a conta.</li>
+        <li>Links de acesso: removidos após 7 dias. Sessões: até 30 dias ou até você sair.</li>
+        <li>Registros de limites de abuso: até 2 dias.</li>
+        <li>Mensagens de contato: até 12 meses.</li>
+      </ul>
+
+      <h2>Seus direitos</h2>
+      <ul>
+        <li><strong>Acessar:</strong> em <a href="{% url 'contas:perfil' %}">Meu perfil</a> você baixa uma cópia dos seus dados (arquivo JSON).</li>
+        <li><strong>Corrigir:</strong> o nome de exibição é editável no perfil; para corrigir o semestre de ingresso, fale conosco.</li>
+        <li><strong>Excluir:</strong> em Meu perfil há o botão de exclusão definitiva da conta, que também apaga os resumos e notas que você publicou.</li>
+        <li><strong>Outros direitos previstos na LGPD</strong> (informação, oposição, revisão): peça pelo formulário de contato.</li>
+      </ul>
+
+      <h2>Segurança</h2>
+      <p>Usamos conexão criptografada (HTTPS), links de acesso de uso único com validade curta, limites contra abuso e acesso restrito ao painel administrativo. Nenhum sistema é totalmente imune a falhas; em caso de incidente que afete seus dados, avisaremos pelos canais disponíveis.</p>
+
+      <h2>Mudanças nesta página</h2>
+      <p>Podemos atualizar este texto. A data no topo indica a versão vigente.</p>
+    </div>
+  </section>
+</main>
+{% endblock %}

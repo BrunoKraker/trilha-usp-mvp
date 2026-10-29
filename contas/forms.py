@@ -22,6 +22,14 @@ class PerfilForm(forms.ModelForm):
         fields = ["nome_exibicao", "ingresso_ano", "ingresso_semestre"]
         widgets = {"ingresso_ano": forms.NumberInput(attrs={"min": 2000, "max": 2100, "placeholder": "2024"})}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Depois de informado, o ingresso só muda pela administração (regra de quem pode contribuir).
+        if self.instance and self.instance.ingresso_ano and self.instance.ingresso_semestre:
+            for campo in ("ingresso_ano", "ingresso_semestre"):
+                self.fields[campo].disabled = True
+                self.fields[campo].help_text = "Para corrigir, fale com a equipe pelo formulário de contato."
+
     def clean_nome_exibicao(self):
         nome = " ".join(self.cleaned_data["nome_exibicao"].split())
         if len(nome) < 2:

@@ -38,14 +38,17 @@ class BrevoEmailBackend(BaseEmailBackend):
             "subject": msg.subject,
             "textContent": msg.body,
         }
+        url = getattr(settings, "BREVO_API_URL", "https://api.brevo.com/v3/smtp/email")
+        if not (url.startswith("https://") or url.startswith("http://127.0.0.1") or url.startswith("http://localhost")):
+            raise RuntimeError("BREVO_API_URL deve usar https://.")
         req = urllib.request.Request(
-            getattr(settings, "BREVO_API_URL", "https://api.brevo.com/v3/smtp/email"),
+            url,
             data=json.dumps(payload).encode("utf-8"),
             headers={"api-key": chave, "content-type": "application/json", "accept": "application/json"},
             method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=10) as resp:
+            with urllib.request.urlopen(req, timeout=8) as resp:  # nosec B310 (esquema validado acima)
                 if resp.status >= 300:
                     raise RuntimeError(f"Brevo respondeu {resp.status}")
         except urllib.error.HTTPError as e:

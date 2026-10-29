@@ -27,3 +27,15 @@ a.disc-item{text-decoration:none;color:inherit;display:flex}
 .muted{color:var(--ink-mute);font-size:13px}
 .empty{padding:28px;border:1px dashed var(--line-strong);border-radius:12px;text-align:center}
 .disc-item .diff-dot.sem{background:var(--line-strong)}
+.skip-link{position:absolute;left:-9999px;top:8px;background:var(--usp-blue-900,#003366);color:#fff;padding:8px 14px;border-radius:6px;z-index:1000}
+.skip-link:focus{left:8px}
+main:focus{outline:none}
+.legal h2{margin-top:28px}
+.legal ul{padding-left:20px}
+.legal table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0}
+.legal th,.legal td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.pager{display:flex;gap:12px;align-items:center;margin-top:14px;font-size:14px}
+.danger-zone{margin-top:28px;padding:16px;border:1px solid #c0392b;border-radius:10px}
+.report summary{cursor:pointer;color:var(--ink-mute);font-size:13px}
+.report form{margin-top:8px}
+.report select,.report input{font:inherit;width:100%;margin-bottom:6px}

@@ -5,15 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}Trilha USP{% endblock %}</title>
 <meta name="description" content="{% block description %}Plataforma de conhecimento colaborativo da comunidade EACH-USP. Informação acadêmica centralizada, construída por alunos.{% endblock %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/fonts.css' %}">
 <link rel="stylesheet" href="{% static 'assets/styles.css' %}">
 <link rel="stylesheet" href="{% static 'assets/app.css' %}">
+<meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+<link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Trilha USP">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{ og_title|default:"Trilha USP" }}">
+<meta property="og:description" content="Plataforma de conhecimento colaborativo da comunidade EACH-USP.">
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/logo.png' %}">
 {% block extra_head %}{% endblock %}
 <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
 </head>
 <body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 {% include "_sprite.html" %}
 
 <header class="site-header">
@@ -69,6 +77,8 @@
           <li><a href="{% url 'core:sobre' %}">Sobre o projeto</a></li>
           <li><a href="{% url 'core:documentacao' %}">Documentação</a></li>
           <li><a href="{% url 'core:contato' %}">Contato</a></li>
+          <li><a href="{% url 'core:privacidade' %}">Privacidade</a></li>
+          <li><a href="{% url 'core:termos' %}">Termos de uso</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -82,12 +92,13 @@
     </div>
     <div class="footer-legal">
       <p>Projeto estudantil independente. Não é um sistema oficial da Universidade de São Paulo.</p>
-      <p> © <span data-year>2026</span> Trilha USP</p>
+      <p>© <span data-year>2026</span> Trilha USP · <a href="{% url 'core:privacidade' %}">Privacidade</a> · <a href="{% url 'core:termos' %}">Termos</a></p>
     </div>
   </div>
 </footer>
 
 <script src="{% static 'assets/main.js' %}" defer></script>
+<script src="{% static 'assets/app.js' %}" defer></script>
 {% block after_footer %}{% endblock %}
 </body>
 </html>

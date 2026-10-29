@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{% if selecionada %}{{ selecionada.nome }} — {% endif %}Disciplinas — Trilha USP{% endblock %}
 {% block content %}
-<main>
+<main id="conteudo" tabindex="-1">
   <div class="workspace">
 
     <aside class="list-pane" aria-label="Lista de disciplinas">
@@ -59,7 +59,7 @@
         <h5 class="block-title">Resumos e dicas de veteranos</h5>
         {% if resumos %}
         <div class="material-grid">
-          {% for r in resumos %}
+          {% for r in pagina %}
           <article class="material-card">
             <div class="mtype"><svg class="icon icon-sm"><use href="#{% if r.tipo == 'dica' %}i-note{% else %}i-file{% endif %}"/></svg> {{ r.get_tipo_display }}</div>
             <h6>{{ r.titulo }}</h6>
@@ -69,13 +69,32 @@
             <div class="foot">
               {% if r.verificado %}<span class="status ok"><svg class="icon icon-sm"><use href="#i-check"/></svg> verificado</span>
               {% else %}<span class="status pending"><svg class="icon icon-sm"><use href="#i-clock"/></svg> sem verificação</span>{% endif %}
+              {% if user.is_authenticated and r.autor_id != user.id and r.pk not in ja_denunciados %}
+              <details class="report"><summary>Denunciar</summary>
+                <form method="post" action="{% url 'disciplinas:denunciar' selecionada.codigo r.pk %}">{% csrf_token %}
+                  <label class="muted" for="motivo-{{ r.pk }}">Motivo</label>
+                  <select id="motivo-{{ r.pk }}" name="motivo" required>
+                    {% for valor, rotulo in form_denuncia.fields.motivo.choices %}{% if valor %}<option value="{{ valor }}">{{ rotulo }}</option>{% endif %}{% endfor %}
+                  </select>
+                  <input name="comentario" maxlength="300" placeholder="Comentário (opcional)" aria-label="Comentário opcional">
+                  <button class="btn-link" type="submit">Enviar denúncia</button>
+                </form>
+              </details>
+              {% elif user.is_authenticated and r.pk in ja_denunciados %}<span class="muted">Denunciado</span>{% endif %}
               {% if user.is_authenticated and r.autor_id == user.id or user.is_staff %}
-              <form method="post" action="{% url 'disciplinas:excluir_resumo' selecionada.codigo r.pk %}" class="inline-form" onsubmit="return confirm('Excluir este resumo?')">{% csrf_token %}<button class="btn-link" type="submit">Excluir</button></form>
+              <form method="post" action="{% url 'disciplinas:excluir_resumo' selecionada.codigo r.pk %}" class="inline-form" data-confirm="Excluir este resumo?">{% csrf_token %}<button class="btn-link" type="submit">Excluir</button></form>
               {% endif %}
             </div>
           </article>
           {% endfor %}
         </div>
+        {% if pagina.paginator.num_pages > 1 %}
+        <nav class="pager" aria-label="Paginação dos resumos">
+          {% if pagina.has_previous %}<a href="?{{ qs_base }}pagina={{ pagina.previous_page_number }}">&larr; Anteriores</a>{% endif %}
+          <span>Página {{ pagina.number }} de {{ pagina.paginator.num_pages }}</span>
+          {% if pagina.has_next %}<a href="?{{ qs_base }}pagina={{ pagina.next_page_number }}">Próximos &rarr;</a>{% endif %}
+        </nav>
+        {% endif %}
         {% else %}
           <div class="empty"><p>Ainda não há resumos para esta disciplina.</p></div>
         {% endif %}

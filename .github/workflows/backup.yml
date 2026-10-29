@@ -1,5 +1,6 @@
-# Backup semanal do banco como artefato do GitHub (guardado por 30 dias).
-# Requer o segredo DATABASE_URL no repositório (Settings > Secrets). NÃO TESTADO ainda.
+# Backup semanal do banco como artefato do GitHub (guardado por 30 dias). NÃO TESTADO ainda.
+# Requer: segredo DATABASE_URL (conexão DIRETA do Neon) e, opcionalmente, a variável PG_MAJOR
+# (versão principal do PostgreSQL do Neon; padrão 17). pg_dump precisa ter versão >= à do servidor.
 name: backup-semanal
 on:
   schedule: [{cron: "0 6 * * 0"}]
@@ -8,12 +9,14 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - name: Instalar cliente PostgreSQL 16
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client-16
       - name: Dump
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: pg_dump --no-owner --format=custom "$DATABASE_URL" -f backup.dump
+          PG_MAJOR: ${{ vars.PG_MAJOR || '17' }}
+        run: |
+          docker run --rm -e DATABASE_URL -v "$PWD:/out" "postgres:${PG_MAJOR}" \
+            sh -c 'pg_dump --no-owner --format=custom "$DATABASE_URL" -f /out/backup.dump'
+          ls -la backup.dump
       - uses: actions/upload-artifact@v4
         with:
           name: backup-trilha-usp

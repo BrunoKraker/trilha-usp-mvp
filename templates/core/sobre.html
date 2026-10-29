@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Sobre — Trilha USP{% endblock %}
 {% block content %}
-<main>
+<main id="conteudo" tabindex="-1">
 
   <section class="page-head">
     <div class="container">
@@ -83,7 +83,7 @@
         <article class="member">
           <div class="member-photo">
             <span class="initials">BR</span>
-            <img src="{% static 'img/equipe/Bruno.jpg' %}" alt="Foto de Bruno" loading="lazy" onerror="this.remove()">
+            <img src="{% static 'img/equipe/Bruno.jpg' %}" alt="Foto de Bruno" loading="lazy" data-remove-on-error>
           </div>
           <div class="member-info">
             <h4>Bruno de Andrade Gama Kraker</h4>
@@ -97,7 +97,7 @@
         <article class="member">
           <div class="member-photo">
             <span class="initials">PS</span>
-            <img src="{% static 'img/equipe/Pedro.jpg' %}" alt="Foto de Pedro" loading="lazy" onerror="this.remove()">
+            <img src="{% static 'img/equipe/Pedro.jpg' %}" alt="Foto de Pedro" loading="lazy" data-remove-on-error>
           </div>
           <div class="member-info">
             <h4>Pedro Henryk Bezerra Souza</h4>
@@ -110,7 +110,7 @@
         <article class="member">
           <div class="member-photo">
             <span class="initials">RM</span>
-            <img src="{% static 'img/equipe/Rodrigo.jpg' %}" alt="Foto de Rodrigo" loading="lazy" onerror="this.remove()">
+            <img src="{% static 'img/equipe/Rodrigo.jpg' %}" alt="Foto de Rodrigo" loading="lazy" data-remove-on-error>
           </div>
           <div class="member-info">
             <h4>Rodrigo Franco de Moraes</h4>
@@ -123,12 +123,12 @@
         <article class="member">
           <div class="member-photo">
             <span class="initials">RJ</span>
-            <img src="{% static 'img/equipe/Romulo.jpg' %}" alt="Foto de Rômulo" loading="lazy" onerror="this.remove()">
+            <img src="{% static 'img/equipe/Romulo.jpg' %}" alt="Foto de Rômulo" loading="lazy" data-remove-on-error>
           </div>
           <div class="member-info">
             <h4>Rômulo Maurício Fonseca Júnior</h4>
             <span class="member-nusp">NUSP 15553801</span>
-            <p class="member-bio">Corinthiano, maloqueiro e sofredor!<br>
+            <p class="member-bio">Corintiano, maloqueiro e sofredor!<br>
               Apaixonado pelos esportes e pela arte! Dança, música, vôlei e futebol sempre estiveram presentes na minha vida.<br>
               Gosto muito de testar novos caminhos e soluções, independente da área da minha vida em que estejam sendo aplicadas.</p>
           </div>
@@ -137,7 +137,7 @@
         <article class="member">
           <div class="member-photo">
             <span class="initials">TI</span>
-            <img src="{% static 'img/equipe/Thales.jpg' %}" alt="Foto de Thales" loading="lazy" onerror="this.remove()">
+            <img src="{% static 'img/equipe/Thales.jpg' %}" alt="Foto de Thales" loading="lazy" data-remove-on-error>
           </div>
           <div class="member-info">
             <h4>Thales Iamamura</h4>

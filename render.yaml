@@ -5,8 +5,9 @@ services:
     runtime: python
     plan: free
     buildCommand: ./build.sh
-    startCommand: gunicorn config.wsgi --workers 2 --timeout 30
-    healthCheckPath: /
+    # 2 processos x 4 threads: um e-mail lento ou uma consulta demorada não trava o site inteiro.
+    startCommand: gunicorn config.wsgi --workers 2 --threads 4 --timeout 30
+    healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.3
@@ -14,7 +15,11 @@ services:
         value: "false"
       - key: SECRET_KEY
         generateValue: true
+      - key: ADMIN_URL             # defina um caminho não óbvio, só letras/números/hífen, ex.: gestao-x7k2p9
+        sync: false
       - key: DATABASE_URL
+        sync: false
+      - key: MIGRATE_DATABASE_URL  # opcional: conexão do dono do banco, só para migrar
         sync: false
       - key: EMAIL_BACKEND
         value: contas.email_backends.BrevoEmailBackend
@@ -24,3 +29,9 @@ services:
         sync: false
       - key: ALLOWED_EMAIL_DOMAINS
         value: usp.br
+      - key: TRUSTED_PROXY_HOPS
+        value: "1"
+      - key: CONTATO_NOTIFICAR       # opcional: e-mail que recebe aviso de novas mensagens de contato
+        sync: false
+      - key: SENTRY_DSN              # opcional: monitoramento de erros
+        sync: false

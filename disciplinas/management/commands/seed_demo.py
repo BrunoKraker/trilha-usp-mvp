@@ -23,14 +23,13 @@ class Command(BaseCommand):
             discs[cod], _ = Disciplina.objects.update_or_create(
                 codigo=cod, defaults={"nome": nome, "semestre_ideal": sem, "obrigatoria": obrig,
                                       "ementa": "Ementa fictícia para testes."})
-        veterano, _ = Usuario.objects.get_or_create(email="veterano@usp.br", defaults={
+        # Domínio reservado (.invalid): nunca coincide com um e-mail real.
+        veterano, _ = Usuario.objects.get_or_create(email="veterano@demo.invalid", defaults={
             "nome_exibicao": "Vera V.", "ingresso_ano": 2022, "ingresso_semestre": 1})
-        calouro, _ = Usuario.objects.get_or_create(email="calouro@usp.br", defaults={
+        Usuario.objects.get_or_create(email="calouro@demo.invalid", defaults={
             "nome_exibicao": "Caio C.", "ingresso_ano": 2026, "ingresso_semestre": 1})
-        Usuario.objects.get_or_create(email="moderador@usp.br", defaults={
-            "nome_exibicao": "Mona M.", "ingresso_ano": 2021, "ingresso_semestre": 1, "is_staff": True})
         AvaliacaoDificuldade.objects.get_or_create(disciplina=discs["DEMO201"], usuario=veterano, defaults={"nota": 4})
         Resumo.objects.get_or_create(disciplina=discs["DEMO201"], autor=veterano, titulo="Como estudar listas e árvores",
                                      defaults={"tipo": "dica", "verificado": True,
                                                "corpo": "Resolva os exercícios de lista encadeada à mão antes de codar. Árvores: treine as três travessias."})
-        self.stdout.write(self.style.SUCCESS("Dados de demonstração criados (veterano@, calouro@, moderador@usp.br)."))
+        self.stdout.write(self.style.SUCCESS("Dados de demonstração criados (veterano@ e calouro@demo.invalid)."))

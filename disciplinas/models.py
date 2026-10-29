@@ -65,3 +65,25 @@ class AvaliacaoDificuldade(models.Model):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["disciplina", "usuario"], name="uma_avaliacao_por_aluno")]
+
+
+class Denuncia(models.Model):
+    class Motivo(models.TextChoices):
+        OFENSIVO = "ofensivo", "Conteúdo ofensivo ou inadequado"
+        INCORRETO = "incorreto", "Informação incorreta"
+        SPAM = "spam", "Spam ou propaganda"
+        OUTRO = "outro", "Outro motivo"
+
+    resumo = models.ForeignKey(Resumo, on_delete=models.CASCADE, related_name="denuncias")
+    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="denuncias_feitas")
+    motivo = models.CharField(max_length=20, choices=Motivo.choices)
+    comentario = models.CharField("comentário", max_length=300, blank=True)
+    criado_em = models.DateTimeField(default=timezone.now)
+    resolvida = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["resolvida", "-criado_em"]
+        constraints = [models.UniqueConstraint(fields=["resumo", "autor"], name="uma_denuncia_por_aluno_e_resumo")]
+
+    def __str__(self):
+        return f"Denúncia de {self.resumo_id} ({self.get_motivo_display()})"

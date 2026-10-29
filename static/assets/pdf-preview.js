@@ -8,9 +8,9 @@
   const canvas = $('#pdf-canvas'), error = $('#pdf-error'), pager = $('#pdf-page-label');
   const previous = $('#pdf-previous'), next = $('#pdf-next'), zoom = $('#pdf-zoom');
   const closeButton = $('#pdf-close');
-  // Versão fixa do pacote Mozilla, via jsDelivr (CDN indicado na documentação).
+  // Versão fixa do pacote Mozilla (pdfjs-dist 4.10.38), hospedada localmente em /static/vendor/pdfjs/.
   // Biblioteca e worker precisam ter exatamente a mesma versão. Sem scripts de PDF.
-  const CDN = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/';
+  const CDN = '/static/vendor/pdfjs/';
   let libraryPromise, loadingTask, pdf, rendering, opener, session = 0, revision = 0;
   let pageNumber = 1, closing = false, resizeTimer, originalOverflow, originalPadding;
   let lastWidth = 0;

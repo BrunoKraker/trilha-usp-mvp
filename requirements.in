@@ -1,0 +1,9 @@
+# Dependências diretas. Gere o requirements.txt (com hashes) com:
+#   pip-compile --generate-hashes --allow-unsafe -o requirements.txt requirements.in
+Django>=5.2,<5.3
+psycopg[binary]>=3.2,<4
+gunicorn>=23,<27
+whitenoise>=6.7,<7
+dj-database-url>=2.2,<4
+python-dotenv>=1.0,<2
+sentry-sdk>=2,<3

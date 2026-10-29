@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import AvaliacaoDificuldade, Resumo
+from .models import AvaliacaoDificuldade, Denuncia, Resumo
 
 
 class ResumoForm(forms.ModelForm):
@@ -26,3 +26,9 @@ class NotaForm(forms.ModelForm):
     class Meta:
         model = AvaliacaoDificuldade
         fields = ["nota"]
+
+
+class DenunciaForm(forms.ModelForm):
+    class Meta:
+        model = Denuncia
+        fields = ["motivo", "comentario"]

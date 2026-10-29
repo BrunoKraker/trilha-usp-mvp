@@ -9,4 +9,5 @@ urlpatterns = [
     path("<str:codigo>/resumos/novo/", views.publicar, name="publicar"),
     path("<str:codigo>/avaliar/", views.avaliar, name="avaliar"),
     path("<str:codigo>/resumos/<int:pk>/excluir/", views.excluir_resumo, name="excluir_resumo"),
+    path("<str:codigo>/resumos/<int:pk>/denunciar/", views.denunciar, name="denunciar"),
 ]

@@ -3,7 +3,7 @@
 {% block title %}Documentação — Trilha USP{% endblock %}
 {% block extra_head %}<link rel="stylesheet" href="{% static 'assets/pdf-preview.css' %}">{% endblock %}
 {% block content %}
-<main>
+<main id="conteudo" tabindex="-1">
 
   <section class="page-head">
     <div class="container">
@@ -34,8 +34,8 @@
 
         <article class="doc-card">
           <span class="doc-cat">Escopo do projeto</span>
-          <h3>Escopo completo</h3>
-          <p>Visão geral, os nove módulos da plataforma e as decisões estratégicas de legitimidade institucional, autenticação, LGPD, governança e sustentabilidade do projeto.</p>
+          <h3>Project Model Canvas</h3>
+          <p>Visão do projeto em uma página: justificativa, objetivo, benefícios, requisitos, partes interessadas, riscos, marcos e custos.</p>
           <div class="doc-foot">
             <div class="pdf-card-actions">
               <button class="btn btn-primary" type="button" data-pdf-preview aria-haspopup="dialog" aria-controls="pdf-preview" hidden>Visualizar</button>

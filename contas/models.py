@@ -72,7 +72,20 @@ class TokenLogin(models.Model):
     token_hash = models.CharField(max_length=64, unique=True)
     criado_em = models.DateTimeField(default=timezone.now, db_index=True)
     usado_em = models.DateTimeField(null=True, blank=True)
+    status_envio = models.CharField(max_length=10, default="pendente",
+                                    choices=[("pendente", "pendente"), ("enviado", "enviado"), ("falhou", "falhou")])
 
     @staticmethod
     def hash_token(token: str) -> str:
         return hashlib.sha256(token.encode()).hexdigest()
+
+
+class EventoLimite(models.Model):
+    """Registro de eventos (pedido de login, falha de admin etc.) para aplicar limites de taxa."""
+
+    tipo = models.CharField(max_length=30)
+    chave = models.CharField(max_length=64)
+    criado_em = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        indexes = [models.Index(fields=["tipo", "chave", "criado_em"])]

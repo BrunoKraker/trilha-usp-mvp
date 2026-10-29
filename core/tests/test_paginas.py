@@ -46,4 +46,8 @@ class PaginasTest(TestCase):
             follow=True,
         )
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Entidades")
+        # O texto do módulo agora vem de um JS estático (sem script inline, por causa da CSP).
+        self.assertContains(response, "assets/em-breve.js")
+        from django.contrib.staticfiles import finders
+        with open(finders.find("assets/em-breve.js"), encoding="utf-8") as f:
+            self.assertIn("name: 'Entidades'", f.read())

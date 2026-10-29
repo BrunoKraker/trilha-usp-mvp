@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Meu perfil — Trilha USP{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
 {% block content %}
-<main>
+<main id="conteudo" tabindex="-1">
   <div class="auth-box">
     <h1>Meu perfil</h1>
     <p>Usamos o semestre de ingresso para liberar a contribuição apenas em disciplinas que você já cursou. Seu e-mail não aparece para outros alunos.</p>
@@ -11,6 +12,19 @@
       <div class="field"><label for="{{ form.ingresso_semestre.id_for_label }}">Semestre de ingresso</label>{{ form.ingresso_semestre }}{{ form.ingresso_semestre.errors }}</div>
       <button class="btn btn-primary btn-lg" type="submit">Salvar</button>
     </form>
+
+    <h2 style="margin-top:32px;font-size:18px">Seus dados</h2>
+    <p><a class="btn btn-outline" href="{% url 'contas:exportar' %}">Baixar uma cópia dos meus dados</a></p>
+    {% if not user.is_staff %}
+    <div class="danger-zone">
+      <h2 style="margin:0 0 8px;font-size:16px">Excluir minha conta</h2>
+      <p class="muted">Apaga definitivamente sua conta e os resumos e notas que você publicou. Não pode ser desfeito.</p>
+      <form method="post" action="{% url 'contas:excluir' %}" data-confirm="Excluir definitivamente a sua conta e tudo que você publicou?">{% csrf_token %}
+        <div class="field"><label for="confirmar">Para confirmar, digite EXCLUIR</label><input id="confirmar" name="confirmar" autocomplete="off" required></div>
+        <button class="btn btn-outline" type="submit">Excluir minha conta</button>
+      </form>
+    </div>
+    {% endif %}
   </div>
 </main>
 {% endblock %}

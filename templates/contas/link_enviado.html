@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Confira seu e-mail — Trilha USP{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
 {% block content %}
-<main>
+<main id="conteudo" tabindex="-1">
   <div class="auth-box">
     <h1>Confira seu e-mail</h1>
     <p>Se o endereço informado estiver correto, você receberá em instantes um link de acesso válido por alguns minutos. Verifique também o spam.</p>

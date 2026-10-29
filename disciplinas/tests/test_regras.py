@@ -160,10 +160,10 @@ class FluxoTest(BaseCase):
 
 
 class ModeracaoTest(BaseCase):
-    def test_grupo_moderadores_so_mexe_em_resumos(self):
+    def test_grupo_moderadores_so_mexe_em_resumos_e_denuncias(self):
         g = Group.objects.get(name="Moderadores")
         cods = set(g.permissions.values_list("codename", flat=True))
-        self.assertEqual(cods, {"view_resumo", "change_resumo", "delete_resumo"})
+        self.assertEqual(cods, {"view_resumo", "change_resumo", "delete_resumo", "view_denuncia", "change_denuncia"})
 
     def test_aluno_comum_nao_acessa_admin(self):
         self.entrar(self.veterano)

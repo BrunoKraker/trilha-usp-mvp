@@ -72,7 +72,7 @@ class LoginTest(TestCase):
 
     def test_open_redirect_bloqueado(self):
         link = pedir_link(self.client, "b@usp.br")
-        u = Usuario.objects.create_user("b@usp.br", nome_exibicao="B", ingresso_ano=2024, ingresso_semestre=1)
+        Usuario.objects.create_user("b@usp.br", nome_exibicao="B", ingresso_ano=2024, ingresso_semestre=1)
         r = self.client.post(link, {"next": "https://evil.com/"})
         self.assertRedirects(r, reverse("core:home"))
 
@@ -107,7 +107,7 @@ class GerarLinkTest(TestCase):
         call_command("gerar_link", "Aluno@usp.br", "--base-url", "https://site.exemplo", stdout=out)
         link = out.getvalue().splitlines()[0]
         self.assertTrue(link.startswith("https://site.exemplo/entrar/verificar/"))
-        r = self.client.post(link.replace("https://site.exemplo", ""))
+        self.client.post(link.replace("https://site.exemplo", ""))
         self.assertIn("_auth_user_id", self.client.session)
 
     def test_comando_recusa_dominio_externo(self):
