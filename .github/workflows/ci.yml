@@ -18,7 +18,7 @@ jobs:
       DEBUG: "true"
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/trilha
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
       - run: pip install --require-hashes -r requirements.txt
