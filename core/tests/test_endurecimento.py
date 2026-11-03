@@ -124,3 +124,21 @@ class ContatoLimitesTest(TestCase):
     def test_sem_notificacao_por_padrao(self):
         self.client.post(reverse("core:contato"), self.dados)
         self.assertEqual(len(mail.outbox), 0)
+
+
+class VariaveisDeAmbienteTest(TestCase):
+    def test_variavel_vazia_usa_o_padrao(self):
+        import os
+        from config.settings import env_bool, env_int
+        with mock.patch.dict(os.environ, {"X_INT": "", "X_BOOL": "  ", "X_OK": "7"}):
+            self.assertEqual(env_int("X_INT", 3), 3)
+            self.assertTrue(env_bool("X_BOOL", True))
+            self.assertEqual(env_int("X_OK", 3), 7)
+            self.assertEqual(env_int("X_AUSENTE", 5), 5)
+
+    def test_numero_invalido_da_erro_claro(self):
+        import os
+        from config.settings import env_int
+        with mock.patch.dict(os.environ, {"X_INT": "abc"}):
+            with self.assertRaisesRegex(RuntimeError, "X_INT"):
+                env_int("X_INT", 3)

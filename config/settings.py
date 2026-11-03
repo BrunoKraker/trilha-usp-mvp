@@ -11,11 +11,20 @@ load_dotenv(BASE_DIR / ".env")
 
 
 def env_bool(name, default=False):
-    return os.environ.get(name, str(default)).strip().lower() in ("1", "true", "yes", "on")
+    valor = os.environ.get(name, "").strip()
+    if not valor:  # variável ausente ou vazia: usa o padrão
+        return default
+    return valor.lower() in ("1", "true", "yes", "on")
 
 
 def env_int(name, default):
-    return int(os.environ.get(name, str(default)))
+    valor = os.environ.get(name, "").strip()
+    if not valor:  # variável ausente ou vazia: usa o padrão
+        return int(default)
+    try:
+        return int(valor)
+    except ValueError:
+        raise RuntimeError(f"A variável {name} deve ser um número inteiro (valor atual: {valor!r}).") from None
 
 
 def env_list(name, default=""):
